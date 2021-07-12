@@ -42,7 +42,7 @@ Once the capture session has started, run through the following steps in a termi
 
 8. Delete the file `file3.txt`.
 
-**In Linux, end the session type the following into the terminal window `Ctrl`+`D`**. 
+**In Linux, to end the session type the following into the terminal window `Ctrl`+`D`**. 
 
 **In Windows, if using the PowerShell `Start-Transcipt` command, type the following into the terminal:**
 
