@@ -4,30 +4,32 @@ For your unit 1 assessment you are required to create a Github repository contai
 
 ## Assessment Steps
 
-Open a terminal/command prompt. To capture the terminal session and all the commands entered into the terminal, enter the following command:
+Open a terminal window. 
+
+To capture the terminal session and all the commands entered into the terminal, enter the following command:
 
 ```sh
 > script output.txt
 ```
 This will record all commands entered in to your terminal and save them to a file called `output.txt`.
 
-To record a script using the Linux `script` command on a windows machine you will need to have the windows subsystem for Linux (WSL 2) installed **OR** alternatively, you can use the PowerShell transcript command:
+To record a script using the Linux `script` command on a Windows machine you will need to have the Windows Subsystem for Linux installed **OR** alternatively, you can use the PowerShell command:
 
 ```powershell
 > Start-Transcript -Path "output.txt"
 ```
 
-Once the capture session has started, run through the following steps. Using terminal commands:
+Once the capture session has started, run through the following steps in a terminal:
 
 1. Create two directories called `folder1` and `folder2`.
 1. Create three files called `file1.txt`, `file2.txt` and `file3.txt`.
 1. Move `file1.txt` into the `folder1` directory.
 1. Move `file2.txt` into the `folder2` directory.
-1. Change directory current by navigating to `folder1`.
+1. Change directory by navigating to `folder1`.
 1. List the current directory files and folders.
 1. In `folder1` create a file called `full.txt` with a file size of 2MB.
 
-**HINT:** the following command creates an empty 4 MB file called `example.log` in Linux
+**HINT:** the following command creates an empty 4 MB file called `example.log`:
 ```sh
 # Linux/MacOs command
 > truncate -s 4m example.log
@@ -38,11 +40,11 @@ Once the capture session has started, run through the following steps. Using ter
 > fsutil file createnew example.log 4194304
 ```
 
-8. Delete the file `file3.txt` in the directory `folder1`.
+8. Delete the file `file3.txt`.
 
-**To end the session type the following into the terminal window `Ctrl`+`D`**. 
+**In Linux, end the session type the following into the terminal window `Ctrl`+`D`**. 
 
-**To end the session on windows Powershell type the following into the terminal:**
+**In Windows, if using the PowerShell `Start-Transcipt` command, type the following into the terminal:**
 
 ```powershell
 Stop-Transcript
@@ -59,7 +61,7 @@ unit-01-assessment-git/
       |--- file1.txt
   |--- folder2/
       |--- file2.txt
-      |--- full.txt
+      |--- full.txt (size: 2MB)
   |--- output.txt
   |--- README.md
 ```
