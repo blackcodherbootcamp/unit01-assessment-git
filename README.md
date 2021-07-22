@@ -32,7 +32,7 @@ Once the capture session has started, run through the following steps in a termi
 **HINT:** the following command creates an empty 4 MB file called `example.log`:
 ```sh
 # Linux/MacOs command
-> truncate -s 4m example.log
+> dd if=/dev/zero bs=1 count=0 seek=4m of=example.log
 ```
 
 ```sh
