@@ -1,12 +1,13 @@
-const { checkFile } = require('../setup.js');
-const output = checkFile('../output.txt');
-const file1 = checkFile('../folder1/file1.txt');
-const file2 = checkFile('../folder2/file2.txt');
-const full = checkFile('../folder2/full.txt');
-const file3 = checkFile('../file3.txt');
+const { fileExists, getFilesize } = require('../setup.js');
 
 // presence tests
 describe('file presence', () => {
+  const output = fileExists('../output.txt');
+  const file1 = fileExists('../folder1/file1.txt');
+  const file2 = fileExists('../folder2/file2.txt');
+  const full = fileExists('../folder2/full.txt');
+  const file3 = fileExists('../file3.txt');
+
   test('output.txt found', () => {
     expect(output).toEqual(true);
   });
@@ -25,5 +26,14 @@ describe('file presence', () => {
 
   test('file3.txt not found', () => {
     expect(file3).toEqual(false);
+  });
+});
+
+// size tests
+describe('file size', () => {
+  const fullSize = getFilesize('../folder2/full.txt');
+
+  test('folder2/full.txt is 2MB', () => {
+    expect(fullSize).toBe(2);
   });
 });
