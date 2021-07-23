@@ -5,7 +5,7 @@ describe('file presence', () => {
   const output = fileExists('../output.txt');
   const file1 = fileExists('../folder1/file1.txt');
   const file2 = fileExists('../folder2/file2.txt');
-  const full = fileExists('../folder2/full.txt');
+  const full = fileExists('../folder1/full.txt');
   const file3 = fileExists('../file3.txt');
 
   test('output.txt found', () => {
@@ -20,7 +20,7 @@ describe('file presence', () => {
     expect(file2).toEqual(true);
   });
 
-  test('folder2/full.txt found', () => {
+  test('folder1/full.txt found', () => {
     expect(full).toEqual(true);
   });
 
@@ -31,9 +31,9 @@ describe('file presence', () => {
 
 // size tests
 describe('file size', () => {
-  const fullSize = getFilesize('../folder2/full.txt');
+  const fullSize = getFilesize('../folder1/full.txt');
 
-  test('folder2/full.txt is 2MB', () => {
+  test('folder1/full.txt is 2MB', () => {
     expect(fullSize).toBe(2);
   });
 });
