@@ -9,15 +9,12 @@ Open a terminal window.
 To capture the terminal session and all the commands entered into the terminal, enter the following command:
 
 ```sh
-> script output.txt
+> TERM=dumb script output.txt
 ```
 This will record all commands entered in to your terminal and save them to a file called `output.txt`.
 
-To record a script using the Linux `script` command on a Windows machine you will need to have the Windows Subsystem for Linux installed **OR** alternatively, you can use the PowerShell command:
-
-```powershell
-> Start-Transcript -Path "output.txt"
-```
+**Windows users:**
+To record a script using the Linux `script` command, you will need to have the Windows Subsystem for Linux installed and Windows Terminal configured to use the Ubuntu shell.
 
 Once the capture session has started, run through the following steps in a terminal:
 
@@ -31,24 +28,12 @@ Once the capture session has started, run through the following steps in a termi
 
 **HINT:** the following command creates an empty 4 MB file called `example.log`:
 ```sh
-# Linux/MacOs command
 > dd if=/dev/zero bs=1 count=0 seek=4m of=example.log
 ```
 
-```sh
-# Windows command
-> fsutil file createnew example.log 4194304
-```
+1. Delete the file `file3.txt`.
 
-8. Delete the file `file3.txt`.
-
-**In Linux, to end the session type the following into the terminal window `Ctrl`+`D`**. 
-
-**In Windows, if using the PowerShell `Start-Transcipt` command, type the following into the terminal:**
-
-```powershell
-Stop-Transcript
-```
+**To end the session, type `exit` into the terminal window**.
 
 ## Assessment Criteria
 
