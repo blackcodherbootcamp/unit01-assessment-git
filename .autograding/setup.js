@@ -1,7 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const { exec } = require("child_process");
+const cleanPath = resolvePath('./output.txt');
+const fullPath = resolvePath('../output.txt');
 
+/**
+ * Tests if a file exists
+ * @param {string} filePath 
+ * @returns 
+ */
 function fileExists(filePath) {
   try {
     return fs.existsSync(resolvePath(filePath));
@@ -12,6 +20,11 @@ function fileExists(filePath) {
   }
 }
 
+/**
+ * Gets the size of a file
+ * @param {string} filePath 
+ * @returns 
+ */
 function getFilesize(filePath) {
   try {
     var stats = fs.statSync(resolvePath(filePath));
@@ -25,35 +38,70 @@ function getFilesize(filePath) {
   }
 }
 
-function getCommands(filePath, callback) {
+/**
+ * Gets an arry of commands from the (formatted) log file
+ * @param {function} callback 
+ */
+function getCommands(callback) {
   try {
     const commands = [];
-    const regex = new RegExp(']2;([a-zA-Z0-9 =/\.\-]+).{2}]1;');
-    const rl = readline.createInterface({
-      input: fs.createReadStream(resolvePath(filePath)),
-      crlfDelay: Infinity
-    });
 
-    rl.on('line', (line) => {
-      if(regex.test(line)) {
-        commands.push(regex.exec(line)[1]);
+    formatLog(fullPath, cleanPath, (error, stdout, stderr) => {
+      if (error) {
+          console.log(`error: ${error.message}`);
+
+          callback(commands);
       }
-    });
 
-    rl.on('close', () => {
-      callback(commands);
+      if (stderr) {
+          console.log(`stderr: ${stderr}`);
+
+          callback(commands);
+      }
+
+      const rl = readline.createInterface({
+        input: fs.createReadStream(cleanPath),
+        crlfDelay: Infinity
+      });
+
+      rl.on('line', (line) => {
+        commands.push(line);
+      });
+
+      rl.on('close', () => {
+        callback(commands);
+      });
     });
   } catch (err) {
     console.log(err);
 
-    return null;
+    callback(commands);
   }
+}
+
+/**
+ * Cleans up the temporary log file
+ */
+function cleanUp() {
+  try {
+    fs.unlinkSync(cleanPath);
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+function formatLog(filePath, cleanPath, callback) {
+  //cat output_bash.txt | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g' | col -b > output_bash-processed.txt
+  exec(`cat ${filePath} | perl -pe 's/\\e([^\\[\\]]|\\[.*?[a-zA-Z]|\\].*?\\a)//g' | col -b > ${cleanPath}`, (error, stdout, stderr) => {
+    callback(error, stdout, stderr);
+  });
 }
 
 function resolvePath(filePath) {
   return path.resolve(__dirname, filePath);
 }
 
+module.exports.cleanUp = cleanUp;
 module.exports.fileExists = fileExists;
 module.exports.getCommands = getCommands;
 module.exports.getFilesize = getFilesize;

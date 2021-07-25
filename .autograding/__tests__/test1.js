@@ -1,4 +1,4 @@
-const { fileExists, getCommands, getFilesize } = require('../setup.js');
+const { cleanUp, fileExists, getCommands, getFilesize } = require('../setup.js');
 
 // presence tests
 describe('file presence', () => {
@@ -43,51 +43,56 @@ describe('commands', () => {
   let commands = [];
 
   beforeAll(done => {
-    getCommands('../output.txt', (data) => {
+    getCommands((data) => {
       commands = data;
       done();
     });
   });
 
+  afterAll(() => {
+    cleanUp();
+  });
+
   test('created folder1', () => {
-    expect(commands).toContain('mkdir folder1');
+    expect(commands.find(command => command.endsWith('mkdir folder1'))).toBeTruthy();
   });
 
   test('created folder2', () => {
-    expect(commands).toContain('mkdir folder2');
+    expect(commands.find(command => command.endsWith('mkdir folder2'))).toBeTruthy();
   });
 
   test('created file1.txt', () => {
-    expect(commands).toContain('touch file1.txt');
+    expect(commands.find(command => command.endsWith('touch file1.txt'))).toBeTruthy();
   });
   
   test('created file2.txt', () => {
-    expect(commands).toContain('touch file2.txt');
+    expect(commands.find(command => command.endsWith('touch file2.txt'))).toBeTruthy();
   });
   
   test('created file3.txt', () => {
-    expect(commands).toContain('touch file3.txt');
+    expect(commands.find(command => command.endsWith('touch file3.txt'))).toBeTruthy();
   });
   
   test('moved file1.txt', () => {
-    expect(commands).toContain('mv file1.txt folder1');
+    expect(commands.find(command => command.endsWith('mv file1.txt folder1'))).toBeTruthy();
   });
   
   test('moved file2.txt', () => {
-    expect(commands).toContain('mv file2.txt folder2');
+    expect(commands.find(command => command.endsWith('mv file2.txt folder2'))).toBeTruthy();
   });
   
   test('deleted file3.txt', () => {
-    expect(commands).toContain('rm file3.txt');
+    expect(commands.find(command => command.endsWith('rm file3.txt'))).toBeTruthy();
   });
   
   test('listed folder1 contents', () => {
-    expect(commands).toContain('cd folder1');
-    expect(commands.find(command => command.startsWith('ls'))).toBeTruthy();
+    const regex = new RegExp('ls(?: -[a-zA-Z])?$');
+    expect(commands.find(command => command.endsWith('cd folder1'))).toBeTruthy();
+    expect(commands.find(command => regex.test(command))).toBeTruthy();
   });
   
   test('created full.txt', () => {
-    expect(commands).toContain('dd if=/dev/zero bs=1 count=0 seek=2m of=full.txt');
+    expect(commands.find(command => command.endsWith('dd if=/dev/zero bs=1 count=0 seek=2m of=full.txt'))).toBeTruthy();
   });
 
 });
