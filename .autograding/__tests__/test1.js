@@ -1,5 +1,5 @@
 const { cleanUp, fileExists, getCommands, getFilesize } = require('../setup.js');
-const outputPath = '../output-omz.txt';
+const outputPath = '../output.txt';
 
 // file tests
 describe('files', () => {
