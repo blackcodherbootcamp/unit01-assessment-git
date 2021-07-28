@@ -68,11 +68,6 @@ describe('commands', () => {
     expect(commands.find(command => command.endsWith('mv file2.txt folder2'))).toBeTruthy();
   });
   
-  test('deleted file3.txt', () => {
-    expect(commands.find(command => command.endsWith('cd ..'))).toBeTruthy();
-    expect(commands.find(command => command.endsWith('rm file3.txt'))).toBeTruthy();
-  });
-  
   test('listed folder1 contents', () => {
     const regex = new RegExp('ls(?: -[a-zA-Z])?$');
     expect(commands.find(command => command.endsWith('cd folder1'))).toBeTruthy();
@@ -81,6 +76,11 @@ describe('commands', () => {
   
   test('displayed current working directory', () => {
     expect(commands.find(command => command.endsWith('pwd'))).toBeTruthy();
+  });
+  
+  test('deleted file3.txt', () => {
+    expect(commands.find(command => command.endsWith('cd ..'))).toBeTruthy();
+    expect(commands.find(command => command.endsWith('rm file3.txt'))).toBeTruthy();
   });
 
 });
