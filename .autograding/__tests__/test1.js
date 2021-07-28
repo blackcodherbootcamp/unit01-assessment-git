@@ -1,5 +1,5 @@
 const { cleanUp, fileExists, getCommands, getFilesize } = require('../setup.js');
-const outputPath = '../output.txt';
+const outputPath = '../output-omz.txt';
 
 // file tests
 describe('files', () => {
@@ -69,7 +69,7 @@ describe('commands', () => {
   });
   
   test('listed folder1 contents', () => {
-    const regex = new RegExp('ls(?: -[a-zA-Z])?$');
+    const regex = new RegExp('ls(?: -[a-zA-Z]+)?$');
     expect(commands.find(command => command.endsWith('cd folder1'))).toBeTruthy();
     expect(commands.find(command => regex.test(command))).toBeTruthy();
   });
