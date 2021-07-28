@@ -6,7 +6,6 @@ describe('files', () => {
   const output = fileExists(outputPath);
   const file1 = fileExists('../folder1/file1.txt');
   const file2 = fileExists('../folder2/file2.txt');
-  const full = fileExists('../folder1/full.txt');
   const file3 = fileExists('../file3.txt');
 
   test('output.txt found', () => {
