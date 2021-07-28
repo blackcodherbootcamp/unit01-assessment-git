@@ -1,8 +1,9 @@
 const { cleanUp, fileExists, getCommands, getFilesize } = require('../setup.js');
+const outputPath = '../output.txt';
 
-// presence tests
-describe('file presence', () => {
-  const output = fileExists('../output.txt');
+// file tests
+describe('files', () => {
+  const output = fileExists(outputPath);
   const file1 = fileExists('../folder1/file1.txt');
   const file2 = fileExists('../folder2/file2.txt');
   const full = fileExists('../folder1/full.txt');
@@ -20,21 +21,8 @@ describe('file presence', () => {
     expect(file2).toEqual(true);
   });
 
-  test('folder1/full.txt found', () => {
-    expect(full).toEqual(true);
-  });
-
   test('file3.txt not found', () => {
     expect(file3).toEqual(false);
-  });
-});
-
-// size tests
-describe('file size', () => {
-  const fullSize = getFilesize('../folder1/full.txt');
-
-  test('folder1/full.txt is 2MB', () => {
-    expect(fullSize).toBe(2);
   });
 });
 
@@ -43,7 +31,7 @@ describe('commands', () => {
   let commands = [];
 
   beforeAll(done => {
-    getCommands((data) => {
+    getCommands(outputPath, (data) => {
       commands = data;
       done();
     });
@@ -82,6 +70,7 @@ describe('commands', () => {
   });
   
   test('deleted file3.txt', () => {
+    expect(commands.find(command => command.endsWith('cd ..'))).toBeTruthy();
     expect(commands.find(command => command.endsWith('rm file3.txt'))).toBeTruthy();
   });
   
@@ -91,8 +80,8 @@ describe('commands', () => {
     expect(commands.find(command => regex.test(command))).toBeTruthy();
   });
   
-  test('created full.txt', () => {
-    expect(commands.find(command => command.endsWith('dd if=/dev/zero bs=1 count=0 seek=2m of=full.txt'))).toBeTruthy();
+  test('displayed current working directory', () => {
+    expect(commands.find(command => command.endsWith('pwd'))).toBeTruthy();
   });
 
 });

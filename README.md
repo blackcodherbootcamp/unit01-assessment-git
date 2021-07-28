@@ -24,14 +24,8 @@ Once the capture session has started, run through the following steps in a termi
 1. Move `file2.txt` into the `folder2` directory.
 1. Change directory by navigating to `folder1`.
 1. List the current directory files and folders.
-1. In `folder1` create a file called `full.txt` with a file size of 2MB.
-
-**HINT:** the following command creates an empty 4 MB file called `example.log`:
-```sh
-> dd if=/dev/zero bs=1 count=0 seek=4m of=example.log
-```
-
-1. Delete the file `file3.txt`.
+1. In `folder1`, confirm the present working directory.
+1. Navigate back to the parent directory and delete the file `file3.txt`.
 
 **To end the session, type `exit` into the terminal window**.
 

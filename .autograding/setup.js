@@ -3,7 +3,6 @@ const path = require('path');
 const readline = require('readline');
 const { exec } = require("child_process");
 const cleanPath = resolvePath('./output.txt');
-const fullPath = resolvePath('../output.txt');
 
 /**
  * Tests if a file exists
@@ -40,13 +39,14 @@ function getFilesize(filePath) {
 
 /**
  * Gets an arry of commands from the (formatted) log file
+ * @param {string} outputPath
  * @param {function} callback 
  */
-function getCommands(callback) {
+function getCommands(outputPath, callback) {
   try {
     const commands = [];
 
-    formatLog(fullPath, cleanPath, (error, stdout, stderr) => {
+    formatLog(resolvePath(outputPath), cleanPath, (error, stdout, stderr) => {
       if (error) {
           console.log(`error: ${error.message}`);
 
