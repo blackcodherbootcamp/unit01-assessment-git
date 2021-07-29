@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "version": "0.0.0",
+  "name": "unit01-assessment",
+  "devDependencies": {
+    "@babel/core": "*",
+    "@babel/preset-env": "*",
+    "babel-jest": "*",
+    "jest": "*",
+    "jest-compact-reporter": "*"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "reporters": [
+      [
+        "jest-compact-reporter",
+        {
+          "diffs": false,
+          "colours": true,
+          "showPassingTests": true
+        }
+      ]
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {}
+      ]
+    ]
+  }
+}
