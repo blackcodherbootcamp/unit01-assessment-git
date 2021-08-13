@@ -4,7 +4,7 @@ For your unit 1 assessment you are required to create a Github repository contai
 
 ## Assessment Steps
 
-Open a terminal window. 
+Open a terminal window and check you are in the main directory of your repository. 
 
 To capture the terminal session and all the commands entered into the terminal, enter the following command:
 
@@ -31,16 +31,15 @@ Once the capture session has started, run through the following steps in a termi
 
 ## Assessment Criteria
 
-Your final repository should have the following files and directories:
+Your final repository should contain the following files and directories:
 
 ```
-unit-01-assessment-git/
+[your local repository directory]
   |
   |--- folder1/
       |--- file1.txt
   |--- folder2/
       |--- file2.txt
-      |--- full.txt (size: 2MB)
   |--- output.txt
   |--- README.md
 ```
