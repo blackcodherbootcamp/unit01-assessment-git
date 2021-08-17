@@ -79,7 +79,7 @@ describe('commands', () => {
   });
   
   test('deleted file3.txt', () => {
-    expect(commands.find(command => command.endsWith('cd ..'))).toBeTruthy();
+    expect(commands.find(command => (command.endsWith('cd ..') || command.endsWith('cd -')))).toBeTruthy();
     expect(commands.find(command => command.endsWith('rm file3.txt'))).toBeTruthy();
   });
 
