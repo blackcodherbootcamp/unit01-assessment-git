@@ -10,7 +10,7 @@ For your unit 1 assessment you are required to create a Github profile. Run thro
 1. Create a directory called `images`.
 1. Download a photo of yourself (or an avatar of your choice), rename it to `avatar.[jpg/gif/png]` and move it into the `images` directory.
 1. Add your name as a level 1 heading
-1. Add Bio, Interests and Career as level 2 headings
+1. Add Bio, Education and Interests as level 2 headings
 1. Add a link to your favourite website
 1. Add formatted text (bold/italic)
 1. Add an ordered list of your top 5 TV shows or movies
